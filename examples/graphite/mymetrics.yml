@@ -1,0 +1,18 @@
+# graphite config file
+
+defaults:
+  encoding: none # yaml, json, none
+  compress: none # deflateRaw, deflate, gzip, or none
+  module: lib/plugins/graphite
+  
+mymetrics:
+
+  host: http://myfoo.bar/graphiteserver
+  frequency: 600 # every 10 minutes
+    
+  metrics:
+    foo: 
+     expression: "foo"
+     from: ""
+     until: ""
+   

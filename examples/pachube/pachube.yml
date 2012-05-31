@@ -1,0 +1,7 @@
+defaults:
+  module: lib/plugins/pachube
+
+myweathersensors:
+  api_key: CHANGE_ME
+  feeds: [ ]
+

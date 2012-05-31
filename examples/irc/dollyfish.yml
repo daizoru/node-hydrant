@@ -1,0 +1,13 @@
+# irc config file
+
+defaults:
+  encoding: none # yaml, json, none
+  compress: none # deflateRaw, deflate, gzip, or none
+  module: lib/plugins/irc
+   
+irc_dollyfish:
+  network: irc.dollyfish.net.nz
+  botname: hydrantfoo42
+  channels: [ "#hydrant" ]
+    
+  #debug: true

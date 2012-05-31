@@ -1,0 +1,13 @@
+{
+ "hydrant" : {
+
+    "defaults" : {
+      "encoding": "none",
+      "compress": "none"
+    },
+
+  
+    "thingspeaks-demo": "examples/rest/thingspeak.yml"
+  }
+
+}

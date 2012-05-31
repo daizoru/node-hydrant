@@ -1,0 +1,16 @@
+ # raw serial port data reading
+
+defaults:
+  encoding: none # yaml, json, none
+  compress: none # deflateRaw, deflate, gzip, or none
+  module: lib/plugins/serial
+    
+# to disable a stream, just add "_" in front of the name
+mycooldevice:
+
+  path: /dev/tty-usbserial1
+  baudrate: 9600 # 115200, 57600, 38400, 19200, 9600, 4800, 2400, 1800, 1200, 600, 300, 200, 150, 134, 110, 75, or 50
+  databits: 8 # 8, 7, 6, or 5.
+  stopbits: # # 1 or 2.
+  parity: 0 # 0, 1, or 2.
+  buffersize: 255 # Must be an integer value.

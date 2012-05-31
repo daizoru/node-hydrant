@@ -1,0 +1,19 @@
+# cube config file
+
+defaults:
+  encoding: none # yaml, json, none
+  compress: none # deflateRaw, deflate, gzip, or none
+  module: lib/plugins/cube
+  
+mymetrics:
+
+  host: http://myfoo.bar/cubeserver
+  frequency: 600 # every 10 minutes
+    
+  metrics:
+    foo: 
+     expression: "foo"
+     start: ""
+     end: ""
+     step: ""
+   

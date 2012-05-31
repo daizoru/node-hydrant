@@ -1,0 +1,10 @@
+defaults:
+  module: lib/plugins/redis
+
+mybigbase:
+  host: 127.0.0.1
+  port: 6379
+  #auth: CHANGE_ME
+    
+  # channels to which you want to subscribe
+  channels: [ ]

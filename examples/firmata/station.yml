@@ -1,0 +1,13 @@
+#hydrant config file
+
+defaults:
+  encoding: none # yaml, json, none
+  compress: none # deflateRaw, deflate, gzip, or none
+  module: lib/plugins/firmata
+
+myweatherstation:
+  sensors:
+    temp1:
+      pin: A0
+      freq: 250
+      scale: [0, 100]

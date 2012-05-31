@@ -1,0 +1,6 @@
+#!/usr/bin/env node
+
+var Hydrant = require('hydrant');
+// you can use .json or .yml, or directly pass the json structure
+var hydrant = new Hydrant(__dirname + '/../config.yml');
+hydrant.start();

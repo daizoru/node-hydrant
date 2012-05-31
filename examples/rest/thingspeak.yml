@@ -1,0 +1,38 @@
+# thingspeak config file
+
+defaults:
+  encoding: none # yaml, json, none
+  compress: none # deflateRaw, deflate, gzip, or none
+  module: lib/plugins/rest
+  
+mythingspeak:
+
+  frequency: 600 # every 10 minutes
+    
+  urls:
+    # format is:  http://api.thingspeak.com/channels/(channel_id)/feed.(format)
+    - http://api.thingspeak.com/channels/9/feed.json
+    - http://api.thingspeak.com/channels/9/feed.json?median=10
+    - http://api.thingspeak.com/channels/9/feed.json?start=2011-11-11%2010:10:10&end=2011-11-11%2011:11:11
+      
+    # see the doc for details: http://community.thingspeak.com/documentation/api/
+    # URL PARAMS:
+    #key=[Read API Key] – no key required for public channels
+    #results=[number of entries to retrieve (8000 max)]
+    #days=[days from now to include in feed]
+    #start=[start date] – YYYY-MM-DD%20HH:NN:SS
+    #end=[end date] - YYYY-MM-DD%20HH:NN:SS
+    #offset=[timezone offset in hours]
+    #status=true (include status updates in feed)
+    #location=true (include latitude, longitude, and elevation in feed)
+    #min=[minimum value to include in response]
+    #max=[maximum value to include in response]
+    #round=x (round to x decimal places)
+    #timescale=x (get first value in x minutes, valid values: 10, 15, 20, 30, 60, 240, 720, 1440)
+    #sum=x (get sum of x minutes, valid values: 10, 15, 20, 30, 60, 240, 720, 1440)
+    #average=x (get average of x minutes, valid values: 10, 15, 20, 30, 60, 240, 720, 1440)
+    #median=x (get median of x minutes, valid values: 10, 15, 20, 30, 60, 240, 720, 1440)
+    #callback=[function name] (used for JSONP cross-domain requests)
+      
+          
+   

@@ -1,0 +1,12 @@
+mykafka:
+  module: lib/plugins/kafka
+
+  # server
+  host:          localhost
+  port:          9092
+  pollInterval:  2000
+  maxSize:       1048576 # 1MB
+  
+  # topic(s)
+  topics:
+    test: 0

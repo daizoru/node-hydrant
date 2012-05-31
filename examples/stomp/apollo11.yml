@@ -1,0 +1,16 @@
+#hydrant config file
+
+defaults:
+  encoding: none # yaml, json, none
+  compress: none # deflateRaw, deflate, gzip, or none
+  module: lib/plugins/stomp
+
+apollo11:
+  port: 61613
+  host: localhost
+  debug: false
+  login: guest
+  passcode: guest
+
+  queue: /queue/apollo11
+  prefetchSize: 10

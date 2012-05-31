@@ -1,0 +1,30 @@
+# hydrant config file. can be in YAML or JSON
+
+# global settings
+defaults:
+  encoding: none # yaml, json, none
+  compress: none # deflateRaw, deflate, gzip, or none
+
+# to disable a stream, just add "_" in front of the namestreams:
+
+# Twitter 
+_all-the-tweets:
+    module: lib/plugins/twitter
+    
+    # you need to change these
+    consumer_key: CHANGE_ME
+    consumer_secret: CHANGE_ME
+    access_token_key: CHANGE_ME
+    access_token_secret: CHANGE_ME
+
+
+# you can also load a sub-config file (yml, or json too!)
+thingspeaks-demo: examples/rest/thingspeak.yml
+
+foo:
+  module: lib/plugins/feeds
+  #min_delay: 20
+  #workers" : 1
+  feeds:
+   - http://feeds.nytimes.com/nyt/rss/World
+   - http://www.chevalannonce.com/rss/annonces.xml

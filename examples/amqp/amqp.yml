@@ -1,0 +1,25 @@
+#hydrant config file
+
+defaults:
+  encoding: none # yaml, json, none
+  compress: none # deflateRaw, deflate, gzip, or none
+  module: lib/plugins/amqp
+
+mycompanyworkflow:
+
+  #### server config ################
+    
+  # use the url format
+  #url: amqp[s]://[user:password@]hostname[:port][/vhost]
+    
+  # or you can use the classic config:
+  host: localhost
+  port: 5672
+  login: guest
+  password: guest
+  vhost: /
+    
+  #### queues #######################
+  queue: my-queue
+  bind: '#'
+    

@@ -1,0 +1,8 @@
+{
+ "min_delay" : 20,
+ "workers" : 1,
+ "feeds" : [
+  'http://feeds.nytimes.com/nyt/rss/World',
+  'http://www.chevalannonce.com/rss/annonces.xml'
+  ]
+}

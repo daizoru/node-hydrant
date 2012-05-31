@@ -1,0 +1,5 @@
+defaults:
+  module: lib/plugins/pgsql
+    
+mydatabase:
+  server: localhost
