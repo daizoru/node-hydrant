@@ -1,4 +1,3 @@
-
 # Copyright (c) 2011, Julian Bilcke <julian.bilcke@gmail.com>
 # All rights reserved.
 #
@@ -24,6 +23,9 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+
+# TODO use node-feedparser-stream? looks so much easier to use
+# https://github.com/philipp-spiess/node-feedparser-stream/blob/master/example/simple.coffee
 FeedSub   = require 'feedsub'
 _         = require 'underscore'
 {inspect} = require 'util'
