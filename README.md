@@ -1,50 +1,54 @@
-# hook.io-hydrant
+# node-hydrant
 
 *Complex event stream aggregator and broadcaster*
 
+## Warning
+
+  node-hydrant is still in development and not yet available for public use (it is not yet on NPM)
+
 ## Description
 
-  WARNING: Hydrant is still in heavy development, and might be subject to drastic changes from one commit to another
-  
-  WARNING2: Most of the sources are buggy / untested / not working yet. But it is easy to fix. Give me some time, and I'll do it!
-  
+  node-hydrant is a simple stream aggregator.
+
   Hydrant read input from various data sources, and emit a single event stream.
   
-  Planned support: Serialport, Pachube, Firmata (Arduino), ThingSpeak, IRC Channels, RSS feeds, Twitter, DataSift, ØMQ, Kafka, AMQP, STOMP, Cube, Graphite, Redis, PostgreSQL, with also support for generic REST APIs.
-  
-  For the moment most of these protocols are not fully functional with Hydrant.
- 
-  You cannot send or write data easily, as Hydrant is a read-only system
-  designed for the lost art of hydromancy.
+  Current status: 
 
-  But feel free to fork and add write functions (hook messages) if you need them. My goal on this project is to have a minimalist read-only streams, so I cut out everything that is not needed.
+* Serialport: Read: 50% - Write: 0% - Tests: No - Usable: No
+* Pachube: Read: 50% - Write: 0% - Tests: No - Usable: No
+* Arduino (via Firmata): Read: 50% - Write: 0% - Tests: No - Usable: No
+* ThingSpeak: Read: 50% - Write: 0% - Tests: No - Usable: No
+* IRC Channels:  Read: 50% - Write: 0% - Tests: No - Usable: No
+* RSS feeds: Read: 50% - Write: 0% - Tests: No - Usable: No
+* Twitter:  70% (not tested yet)
+* DataSift:  50% (not tested yet)
+* ØMQ:  50% (not tested yet)
+* Kafka:  50% (not tested yet)
+* AMQP:  50% (not tested yet)
+* STOMP:  50% (not tested yet)
+* Cube:  50% (not tested yet)
+* Graphite: 50% (not tested yet)
+* Redis: 50% (not tested yet)
+* PostgreSQL: 50% (not tested yet)
+* Generic REST APIs:  50% (not tested yet)
 
-## Use cases, or how could you use it
-  
+## What it can be used for
+
   Some ideas, in random order: ambient colored lighting to show the current world mood, quake alerting systems, chatroom bots,
   text-to-speech or personal assistant systems, hacker devices, art installations..
 
-
-## TODO
-
-  * Make it work
-  * open-source it for real (tests + NPM package + announce on the internets)
-  * Implement push / writes / emits / send / set (that it - output!)
-  * Separate Hook.io wrapper from Hydrant core (to make it work on Vert.x, Meteor..)
-  * More test! More plugins!
-
 ## Licence
 
-  BSD: Do what you want. Control your own life. I'm not responsible if you get damaged in the process (see [LICENCE.txt](https://github.com/daizoru/hook.io-hydrant/blob/master/LICENCE.txt) for details).
+  BSD: [LICENCE.txt](https://github.com/daizoru/hook.io-hydrant/blob/master/LICENCE.txt))
   
 ## Installation
 
 ### Global install:
 
-  This way:
+  For the moment this is not possible, but once it will be on NPM, you will be able to run:
   
 ``` bash
-  npm install hook.io-hydrant -g
+  npm install node-hydrant -g
 ```
 
   You need to have [npm](http://npmjs.org) installed.
@@ -54,7 +58,7 @@
   Open your package.json and add this to dependencies:
 
 ``` yaml
-  "hook.io-hydrant": "0.0.0"
+  "node-hydrant": "0.0.0"
 ```
 
   Bind to the system. May need sudo depending on your NPM config:
@@ -163,22 +167,6 @@ test1:
 ``` 
 
   That's all!
-  
-  
-### Optional native modules and optimizations
-
-You can install all the optional dependencies
-  
-#### Redis Plugin
-
-  For the redis plugin, ou can optionally install node-hiredis. To quote the node-redis README:
-  
-  "Pieter Noordhuis has provided a binding to the official hiredis C library, which is non-blocking and fast. To use hiredis, do:
-
-  npm install hiredis
-  If hiredis is installed, node_redis will use it by default. Otherwise, a pure JavaScript parser will be used.
-
-   If you use hiredis, be sure to rebuild it whenever you upgrade your version of node. There are mysterious failures that can happen between node and native code modules after a node upgrade."
 
 ## Running Instructions
 
