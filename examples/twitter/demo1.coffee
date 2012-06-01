@@ -1,14 +1,14 @@
 #!/usr/bin/env coffee
 
 Hydrant = require '../../lib/hydrant'
-
+{inspect} = require 'util'
 hydrant = new Hydrant
   defaults:
     encoding: no # yaml, json, none
     compress: no # deflateRaw, deflate, gzip, or none
 
   twitter:
-    module:               'lib/input/twitter'
+    module:               '../../lib/input/twitter'
 
     consumer_key:         'CONSUMER_KEY'
     consumer_secret:      'CONSUMER_SECRET'
@@ -22,5 +22,7 @@ hydrant = new Hydrant
       "data.text.length < 40"   # if you are using json/yml, you can use plain text
       (-> Math.random() > 0.05) # or if you are in a JS/Coffee context, use some real code!
     ]
+hydrant.on 'input', (msg) ->
+  console.log " >> INPUT #{inspect msg}"
 
 hydrant.start()
