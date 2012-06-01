@@ -65,6 +65,23 @@
   
     $ npm link
 
+## Using plugins
+
+  You need to install dependencies in your project,
+  if you wish to use a plugin
+
+*  "feedsub"           : "0.1.x"
+*  "irc"               : "0.0.x"
+*  "immortal-ntwitter" : "git://github.com/horixon/immortal-ntwitter.git"
+*  "pachube-stream"    : "0.0.x"
+*  "serialport"        : "0.7.x"
+*  "zmq"               : "2.0.x"
+*  "amqp"              : ">0.1.2"
+*  "redis"             : "0.7.x"
+*  "kafka"             : ">0.2.1"
+*  "datasift"          : "0.2.x"
+*  "stomp"              : "git://github.com/benjaminws/stomp-js.git"
+  
 ## Creating a new Plugin
 
   Hydrant sources need to implement some kind of interface.

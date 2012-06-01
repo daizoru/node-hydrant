@@ -5,20 +5,13 @@
         "email" : "julian.bilcke@daizoru.com",
         "url" : "http://github.com/daizoru"
    },
-  "name": "hook.io-hydrant",
+  "name": "node-hydrant",
   "description": "Complex event stream aggregator and broadcaster",
   "version": "0.0.0",
   "repository": {
     "type": "git",
-    "url": "git://github.com/daizoru/hook.io-hydrant.git"
+    "url": "git://github.com/daizoru/node-hydrant.git"
   },
-    "keywords" : [
-       "hook.io",
-       "twitter",
-       "rss",
-       "irc"
-    ],
-    
     "directories" : {
       "lib" : "./lib",
       "example" : "./example",
@@ -26,7 +19,7 @@
     },
   "main" : "./lib/hydrant",
    "bin": {
-     "hook-hydrant": "./bin/hook-hydrant"
+     "hydrant": "./bin/hydrant"
    },
   "scripts" : {
     "build" : "coffee --compile --output lib/ src/",
@@ -41,60 +34,10 @@
   },
   "dependencies": {
      "pkginfo"           : "0.2.x", 
-     "hook.io"           : "0.8.9", 
-     "daizoru-toolbox"   : "git://github.com/daizoru/node-daizoru-toolbox.git",
      "libyaml"           : "0.1.x"
-  },
-  "optionalDependencies": {
-     "feedsub"           : "0.1.x",
-     "irc"               : "0.0.x",
-     "ntwitter"          : ">0.2.10",
-     "immortal-ntwitter" : "0.0.x",
-     "pachube-stream"    : "0.0.x",
-     "serialport"        : "0.7.x",
-     "zmq"               : "2.0.x",
-     "amqp"              : ">0.1.2",
-     "redis"             : "0.7.x",
-     "kafka"             : ">0.2.1",
-     "datasift"          : "0.2.x",
-     "stop"              : "git://github.com/benjaminws/stomp-js.git"
   },
   "devDependencies": {
     "mocha": "> 0.12.x",
     "coffee-script" : "1.2.x"
-  },
-  "hook" : {
-    "type" : "hydrant",
-    "description" : "Complex event stream aggregator and broadcaster",
-    "images" : [
-        { 
-          "size" : "29x29",
-          "url" : "http://github.com/scottyapp/hook.io-blueprint-coffeescript/raw/master/assets/blueprint-coffeescript29x29.png"
-        },
-        { 
-          "size" : "57x57",
-          "url" : "http://github.com/scottyapp/hook.io-blueprint-coffeescript/raw/master/assets/blueprint-coffeescript57x57.png"
-        },
-        { 
-          "size" : "114x114",
-          "url" : "http://github.com/scottyapp/hook.io-blueprint-coffeescript/raw/master/assets/blueprint-coffeescript114x114.png"
-        }
-        
-      ],
-    
-    "in" : [{
-        "name" : "hydrant::start",
-        "signatures" : []
-      }
-    ],
-    
-    "out" : [{
-        "name" : "hydrant::error",
-        "signatures" : []
-      },{
-        "name" : "hydrant::event",
-        "signatures" : []
-      }
-    ]
   }
 }

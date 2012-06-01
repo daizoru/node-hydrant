@@ -23,20 +23,36 @@
 # ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-Twitter = require 'immortal-ntwitter'
-{P} = require "daizoru-toolbox"
+{inspect} = require 'util'
+_ = require 'underscore'
+ntwitter = require 'ntwitter'
 
 class module.exports
   
   constructor: (@config) ->
-    @twitter = new Twitter(@config)
-    
-  start: -> 
-    @twitter.immortalStream 'statuses/sample', null, (s) =>
-      s.on 'error', (err) => @error err
-      s.on 'data', (tweet) =>
-        return if tweet.text.length > 40 # <- had to to basic filtering to help debug hydrant
-        return if P 0.9                  # <- this will be removed for the official release
-        @emit tweet.text
+    @filters = []
+    if @config.ignores?
+      for ignore in @config.ignores
+        @filters.push ignore
+      delete @config['ignores']
+    @twitter = new ntwitter @config
+
+  start: => 
+    # rate limit: 400 keywords, 5,000 follow userids
+    @twitter.stream 'statuses/sample', undefined, (s) =>
+
+      process = (data) =>
+        #console.log "data: #{inspect data}"
+        for filter in @filters
+          ignore = if _.isString(filter) then eval(filter) else filter(data)
+          return if ignore
+        #console.log "data.text: #{inspect data.text}"
+        @emit text: data.text
+
+      s.on 'error', (err) => 
+        if err.text? # ntwitter is buggy - no time to fix it right now
+          process err
+        else     
+          @error "#{inspect err}"
+      s.on 'data', (data) => process data
 

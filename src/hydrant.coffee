@@ -40,7 +40,8 @@ loadFile = require './loadfile'
 class module.exports extends events.EventEmitter
   constructor: (options) ->  
 
-    @streams = []
+    @started = no
+    @streams = {}
     
     if _.isString options
       loadFile options, (config) =>
@@ -78,47 +79,63 @@ class module.exports extends events.EventEmitter
 
     @log "Configuration loaded. Installing plugins:"
     for stream, conf of config
-      if stream[0] isnt '_' and stream isnt "defaults"
+      if (stream[0] isnt '_') and (stream isnt "defaults")
         if _.isString conf
+          @log "loading config file"
           loadFile conf, (err, conf) => 
+            @log "C"
             if err
               @error "#{inspect err}"
             else
               @install stream, conf
         else
           @install stream, conf
+    return
     
   log: (msg) =>
     console.log "#{msg}"
   error: (msg) =>
     console.error "#{msg}"
 
-  onAny: (msg, cb) ->
-
   # install a new service
-  install: (name, config) ->
-    modulePath = "lib/plugins/rest"
-    if @config.default?
-      modulePath ?= @config.default.module
-    modulePath ?= config.module
+  install: (name, config) =>
+
+    modulePath = "lib/plugins/none"
+    if @config.default?.module?
+      @log "using default module: #{@config.default.module}"
+      modulePath = @config.default.module
+    if config.module?
+      @log "using asked module: #{config.module}"
+      modulePath = config.module
     Stream = require modulePath
     conf = config
     delete conf.module
     stream = new Stream conf
     stream.emit = (data) =>
+      data.stream = name
       @encode data, (err,data) =>
         if err?
           @error " - [#{name}] error when encoding message: #{inspect err}"  
         else
-          @log " - [#{name}] event: #{inspect data}"
-          @emit "#{name}", data
+          @emit "input", data
     stream.error = (err) => 
-      @error " - [#{name}]: #{inspect err}" 
-    @streams.push stream
-    @log " - installed #{name}"
-    stream.start()
+      @error "ERROR #{name}: #{err}"
+    @streams[name] = stream
+    @log " - added #{name} stream"
 
-  uninstall: (name) ->
+    # auto start late streams
+    if @started
+      stream.start()
+      @log " - started #{name} stream"
+      
+  start: =>
+    @started = yes
+    for name, stream of @streams
+      stream.start()
+      @log " - started #{name} stream"
+
+  uninstall: (name) =>
     @log "uninstall #{name}"
     @streams[name].stop()
     delete @streams[name]
+
