@@ -5,7 +5,7 @@
         "email" : "julian.bilcke@daizoru.com",
         "url" : "http://github.com/daizoru"
    },
-  "name": "node-hydrant",
+  "name": "hydrant",
   "description": "Complex event stream aggregator and broadcaster",
   "version": "0.0.0",
   "repository": {
@@ -14,7 +14,7 @@
   },
     "directories" : {
       "lib" : "./lib",
-      "example" : "./example",
+      "examples" : "./examples",
       "test" : "./test"
     },
   "main" : "./lib/hydrant",

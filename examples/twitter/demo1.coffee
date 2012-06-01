@@ -1,6 +1,6 @@
 #!/usr/bin/env coffee
 
-Hydrant = require '../../lib/hydrant'
+Hydrant = require 'hydrant'
 {inspect} = require 'util'
 hydrant = new Hydrant
   defaults:
@@ -8,13 +8,17 @@ hydrant = new Hydrant
     compress: no # deflateRaw, deflate, gzip, or none
 
   twitter:
-    module:               '../../lib/input/twitter'
+    module:               './input/twitter'
 
     consumer_key:         'CONSUMER_KEY'
     consumer_secret:      'CONSUMER_SECRET'
     access_token_key:     'ACCESS_TOKEN_KEY'
     access_token_secret:  'ACCES_TOKEN_SECRET'
   
+    endpoint: 'statuses/filter' # or 'statuses/sample' (remove 'search' in this case)
+    search:
+      track: 'node,javascript,clojure'
+
     # you can pass conditions to ignore some entries of the flow
     # warning: they are directly executed by Node, so be sure
     # your Hydrant config file come from a trusted source!

@@ -30,6 +30,14 @@ ntwitter = require 'ntwitter'
 class module.exports
   
   constructor: (@config) ->
+    @endpoint = 'statuses/sample'
+    if @config.endpoint?
+      @endpoint = @config.endpoint
+
+    @search = undefined
+    if @config.search?
+      @search = @config.search
+
     @filters = []
     if @config.ignores?
       for ignore in @config.ignores
@@ -37,9 +45,10 @@ class module.exports
       delete @config['ignores']
     @twitter = new ntwitter @config
 
+
   start: => 
     # rate limit: 400 keywords, 5,000 follow userids
-    @twitter.stream 'statuses/sample', undefined, (s) =>
+    @twitter.stream @endpoint, @search, (s) =>
 
       process = (data) =>
         #console.log "data: #{inspect data}"
