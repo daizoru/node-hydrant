@@ -34,7 +34,8 @@
   },
   "dependencies": {
      "pkginfo"           : "0.2.x", 
-     "libyaml"           : "0.1.x"
+     "libyaml"           : "0.1.x",
+     "ntwitter"          : "0.3.0"
   },
   "devDependencies": {
     "mocha": "> 0.12.x",
