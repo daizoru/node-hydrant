@@ -12,35 +12,42 @@
 
   Hydrant read input from various data sources, and emit a single event stream.
   
-  Current status: 
+  For the moment there is not a lot of things that work (Twitter is working, in read-only),
+  but in the future tests should be added, more examples, and maybe some output/push/write functions.
 
+  Current status: 
+  
+* Twitter:  Read: 80% - Write: 0% - Tests: No - Usable: hell yes!!
 * Serialport: Read: 50% - Write: 0% - Tests: No - Usable: No
 * Pachube: Read: 50% - Write: 0% - Tests: No - Usable: No
 * Arduino (via Firmata): Read: 50% - Write: 0% - Tests: No - Usable: No
 * ThingSpeak: Read: 50% - Write: 0% - Tests: No - Usable: No
 * IRC Channels:  Read: 50% - Write: 0% - Tests: No - Usable: No
 * RSS feeds: Read: 50% - Write: 0% - Tests: No - Usable: No
-* Twitter:  70% (not tested yet)
-* DataSift:  50% (not tested yet)
-* ØMQ:  50% (not tested yet)
-* Kafka:  50% (not tested yet)
-* AMQP:  50% (not tested yet)
-* STOMP:  50% (not tested yet)
-* Cube:  50% (not tested yet)
-* Graphite: 50% (not tested yet)
-* Redis: 50% (not tested yet)
-* PostgreSQL: 50% (not tested yet)
-* Generic REST APIs:  50% (not tested yet)
+* DataSift: Read: 50% - Write: 0% - Tests: No - Usable: No
+* ØMQ:  Read: 50% - Write: 0% - Tests: No - Usable: No
+* Kafka:  Read: 50% - Write: 0% - Tests: No - Usable: No
+* AMQP:  Read: 50% - Write: 0% - Tests: No - Usable: No
+* STOMP:  Read: 50% - Write: 0% - Tests: No - Usable: No
+* Cube:  Read: 50% - Write: 0% - Tests: No - Usable: No
+* Graphite: Read: 50% - Write: 0% - Tests: No - Usable: No
+* Redis: Read: 50% - Write: 0% - Tests: No - Usable: No
+* PostgreSQL: Read: 50% - Write: 0% - Tests: No - Usable: No
+* Generic REST APIs:  Read: 50% - Write: 0% - Tests: No - Usable: No
 
-## What it can be used for
+## Use cases
 
-  Some ideas, in random order: ambient colored lighting to show the current world mood, quake alerting systems, chatroom bots,
-  text-to-speech or personal assistant systems, hacker devices, art installations..
+  Hydrant is designed to sip data from heterogeneous streams (web/irc/twitter etc..), in order to detect interesting events on the noise for a private project. But really, the "do something with the data" part is left as an exercice to the developer. 
+
+  But OK you need ideas: play with Arduino, Twitter stream, create an alert system if people on irc, blogs or tweet "earthquake", "market collaspe", "it's snowing", "raining" or "iPhone 5", if your app is sending alerts over your company message queue..
 
 ## Licence
 
   BSD: [LICENCE.txt](https://github.com/daizoru/hook.io-hydrant/blob/master/LICENCE.txt))
   
+## TODO
+
+  Implement 
 ## Installation
 
 ### Global install:
@@ -70,7 +77,46 @@
 ### Using JavaScript
 
 ``` javascript
-// TODO
+#!/usr/bin/env node
+
+var inspect = require('util').inspect;
+var Hydrant = require('hydrant');
+
+var hydrant = new Hydrant({
+  // DEFAULT SETTINGS
+  // you can optionaly convert the event's jsObject to string (JSON or YAML)
+  // and compress this string, too
+  defaults: {
+    encoding: false, // yaml, json, none
+    compress: false // deflateRaw, deflate, gzip, or none
+  },
+
+  // STREAMS
+  // each stream must have it's own unique name (here this is "twitter")
+  twitter: {
+    module: './input/twitter',
+    consumer_key: 'CONSUMER_KEY',
+    consumer_secret: 'CONSUMER_SECRET',
+    access_token_key: 'ACCESS_TOKEN_KEY',
+    access_token_secret: 'ACCES_TOKEN_SECRET',
+    endpoint: 'statuses/filter',
+    search: {
+      track: 'node,javascript,clojure'
+    },
+    ignores: [
+      "data.text.length < 40", (function() {
+        return Math.random() > 0.05;
+      })
+    ]
+  }
+});
+
+hydrant.on('input', function(msg) {
+  return console.log(" >> INPUT " + (inspect(msg)));
+});
+
+// start listening to the streams
+hydrant.start();
 ```
 
 ### Using CoffeeScript
@@ -81,10 +127,15 @@
 Hydrant = require 'hydrant'
 {inspect} = require 'util'
 hydrant = new Hydrant
+  # DEFAULT SETTINGS
+  # you can optionaly convert the event's jsObject to string (JSON or YAML)
+  # and compress this string, too
   defaults:
     encoding: no # yaml, json, none
     compress: no # deflateRaw, deflate, gzip, or none
 
+  # STREAMS
+  # each stream must have it's own unique name (here this is "twitter")
   twitter:
     module:               './input/twitter'
 
@@ -110,14 +161,42 @@ hydrant.on 'input', (msg) ->
 hydrant.start()
 ```
 
-## Using plugins
+
+
+### Using Config files
+
+  
+``` yaml
+
+# some default settings
+defaults:
+  encoding: none # yaml, json, none
+  compress: none # deflateRaw, deflate, gzip, or none 
+  
+  # default module for channels
+  module: lib/plugins/rest
+  
+# unique channel name
+test1:
+  # syntax is the same than Node's require()
+  module: lib/plugins/awesomeplugin
+
+  # your plugin-specific config
+  foo: bar
+  bar: foo
+  some_parameter: 42
+``` 
+
+  That's all!
+
+## Playing with data sources / sinks, aka Hydrant Plugins
 
   You need to install dependencies in your project,
   if you wish to use plugins:
 
 *  "feedsub"           : "0.1.x"
 *  "irc"               : "0.0.x"
-* # "immortal-ntwitter" : "git://github.com/horixon/immortal-ntwitter.git"
+* # (not used for the moment: "immortal-ntwitter" : "git://github.com/horixon/immortal-ntwitter.git")
 *  "ntwitter"          : "0.3.0"
 *  "pachube-stream"    : "0.0.x"
 *  "serialport"        : "0.7.x"
@@ -194,52 +273,6 @@ class module.exports
 ``` 
 
 
-## Using Hydrant
-
-  You need to setup your config file. 
-  For the moment, hydrant will look for a "config.yml" file in the current dir.
-  Yes I know, it sucks. I'll add optimist of other argv reader soon.
-  
-  That said, you can hack the code right now, and change this variable.
-  
-  I know you guys like YAML with mustaches, I mean, JSON.
-  I find it a bit uneasy for config files (you can't put comments in it)
-  but Hydrant can read them, to.
-
-  
-  
-``` yaml
-
-# some default settings
-defaults:
-  encoding: none # yaml, json, none
-  compress: none # deflateRaw, deflate, gzip, or none 
-  
-  # default module for channels
-  module: lib/plugins/rest
-  
-# unique channel name
-test1:
-  # syntax is the same than Node's require()
-  module: lib/plugins/awesomeplugin
-
-  # your plugin-specific config
-  foo: bar
-  bar: foo
-  some_parameter: 42
-``` 
-
-  That's all!
-
-## Running Instructions
-
-  Change config.example.yml to config.yml, then run:
-  
-    $ ./bin/hydrant
-  
-  Or, if you have made changes in the source:
-  
-    $ npm run-script start
 
 ## Development Instructions
 
@@ -267,11 +300,4 @@ test1:
   
     $ npm link
 
-## Invocation from another Hook
-
-  Feasible, but for the moment a bit funky, since Hydrant can't load hook.io-style config files yet
-
-## Unreadable, machine-generated API
-
-  Not yet
 
