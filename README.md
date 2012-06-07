@@ -16,7 +16,7 @@
   but in the future tests should be added, more examples, and maybe some output/push/write functions.
 
   Current status: 
-  
+
 * Twitter:  Read: 80% - Write: 0% - Tests: No - Usable: hell yes!!
 * Serialport: Read: 50% - Write: 0% - Tests: No - Usable: No
 * Pachube: Read: 50% - Write: 0% - Tests: No - Usable: No
@@ -37,9 +37,9 @@
 
 ## Use cases
 
-  Hydrant is designed to sip data from heterogeneous streams (web/irc/twitter etc..), in order to detect interesting events on the noise for a private project. But really, the "do something with the data" part is left as an exercice to the developer. 
+  Hydrant is designed to sip data from heterogeneous streams (web/irc/twitter etc..), in order to detect meaningful events from the "world wild noise" (this is a separate private project, not available on github). 
 
-  But OK you need ideas: play with Arduino, Twitter stream, create an alert system if people on irc, blogs or tweet "earthquake", "market collaspe", "it's snowing", "raining" or "iPhone 5", if your app is sending alerts over your company message queue..
+  However this can be used for a variety of purposes. The "do something with the data" part is left as an exercice to you, "software creator", but if you need ideas: play with Arduino, Twitter stream, create an alert system if people on irc, blogs or tweet "earthquake", "market collaspe", "it's snowing", "raining" or "iPhone 5", if your app is sending alerts over your company message queue..
 
 ## Licence
 
