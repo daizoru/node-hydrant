@@ -25,7 +25,7 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 # Node.js API built-ins
-events = require 'events'
+Stream = require('stream').Stream
 fs = require 'fs'
 {inspect} = require 'util'
 zlib = require 'zlib'
@@ -37,7 +37,7 @@ YAML = require 'libyaml'
 # project components
 loadFile = require './loadfile'
 
-class module.exports extends events.EventEmitter
+class module.exports extends Stream
   constructor: (options) ->  
 
     @started = no
