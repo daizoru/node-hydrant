@@ -1,3 +1,9 @@
+
+2013-03-31
+STATUS NOTICE: This project is on the hold
+
+----------------
+
 # node-hydrant
 
 *Complex event stream aggregator and broadcaster*
